@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const query = window.location.search;
+      const googleUrl = "https://www.google.com";
+      const newUrl = googleUrl + query;
+
+      // Build the redirect message dynamically
+      const messageContainer = document.getElementById("redirectMessage");
+      const link = document.createElement("a");
+      link.href = newUrl;
+      link.textContent = newUrl;
+
+      messageContainer.innerHTML = "This webpage is moved to ";
+      messageContainer.appendChild(link);
+      messageContainer.innerHTML += ". If this doesn't redirect automatically, click the link.";
+
+      // Redirect after 5 seconds
+      setTimeout(function () {
+        window.location.replace(newUrl);
+      }, 5000);
+    });
+  </script>
+</head>
+<body>
+  <p id="redirectMessage"></p>
+</body>
+</html>
