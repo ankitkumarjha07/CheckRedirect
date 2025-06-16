@@ -5,29 +5,22 @@
   <title>Redirecting...</title>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      const query = window.location.search;
-      const googleUrl = "https://skilling.wadhwanifoundation.org";
-      const newUrl = googleUrl + query;
-
-      // Build the redirect message dynamically
-      const messageContainer = document.getElementById("redirectMessage");
-      const link = document.createElement("a");
-      link.href = newUrl;
-      link.textContent = newUrl;
-
-      messageContainer.innerHTML = "This webpage is moved to ";
-      messageContainer.appendChild(link);
-      messageContainer.innerHTML += ". If this doesn't redirect automatically, click the link.";
-
-      // Redirect after 5 seconds
-      setTimeout(function () {
-        window.location.replace( "https://skilling.wadhwanifoundation.org" +
-    window.location.pathname
-);
-;
+      const base = "https://skilling.wadhwanifoundation.org";
+      const { pathname, search, hash } = window.location;
+      const newUrl = base + pathname + search + hash;
+  
+      const msg = document.getElementById("redirectMessage");
+      msg.innerHTML = `
+        This webpage has moved to 
+        <a href="${newUrl}">${newUrl}</a>. 
+        If it doesn't redirect automatically, click the link.
+      `;
+  
+      setTimeout(() => {
+        window.location.replace(newUrl);
       }, 2000);
     });
-  </script>
+  </script>  
 </head>
 <body>
   <p id="redirectMessage"></p>
