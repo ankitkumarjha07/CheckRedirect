@@ -3,26 +3,80 @@
 <head>
   <meta charset="UTF-8">
   <title>Redirecting...</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #f4f4f5;
+      color: #333;
+    }
+    .wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding: 1rem;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      max-width: 400px;
+      width: 100%;
+      padding: 2rem;
+      text-align: center;
+    }
+    .card h1 {
+      font-size: 1.25rem;
+      font-weight: normal;
+      margin-bottom: 1.5rem;
+    }
+    .card img.logo {
+      max-width: 160px;
+      display: block;
+      margin: 0 auto 1.5rem;
+    }
+    .card p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+    .card a {
+      color: #0066cc;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .card a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="card">
+      <h1>You are being redirected to <strong>Skilling</strong>…</h1>
+      <img class="logo" src="https://skilling.wadhwanifoundation.org/favicon.ico" alt="Skilling logo">
+      <p>If you don’t wish to wait, <a id="redirectLink" href="#">click here</a>.</p>
+    </div>
+  </div>
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", () => {
       const base = "https://skilling.wadhwanifoundation.org";
       const { pathname, search, hash } = window.location;
       const newUrl = base + pathname + search + hash;
-  
-      const msg = document.getElementById("redirectMessage");
-      msg.innerHTML = `
-        This webpage has moved to 
-        <a href="${newUrl}">${newUrl}</a>. 
-        If it doesn't redirect automatically, click the link.
-      `;
-  
+
+      const link = document.getElementById("redirectLink");
+      link.href = newUrl;
+      link.textContent = newUrl;
+
       setTimeout(() => {
         window.location.replace(newUrl);
       }, 2000);
     });
-  </script>  
-</head>
-<body>
-  <p id="redirectMessage"></p>
+  </script>
 </body>
 </html>
